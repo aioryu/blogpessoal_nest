@@ -1,37 +1,50 @@
-import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Tema } from '../../tema/entities/tema.entity';
+import { IsNotEmpty } from "class-validator";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
+import { Tema } from "../../tema/entities/tema.entity";
+import { Usuario } from "../../usuario/entities/usuario.entities";
 
-@Entity({name: "tb_postagens"})
-export class Postagem{
 
-    @PrimaryGeneratedColumn()
-    id: number;
 
-    @IsNotEmpty()
-    @Column({length: 100, nullable: false})
-    titulo: string;
+@Entity({ name: "tb_postagens" })
 
-    @IsNotEmpty()
-    @Column({length: 1000, nullable: false})
-    texto: string;
-    
-    @UpdateDateColumn()
-    data: Date;
-   
-    @ManyToOne(() => Tema, (tema) => tema.postagem, {
-        onDelete: "CASCADE",
-    })
-    @JoinColumn({ name: 'tema_id' })
-    tema: Tema;
-    
-    
+// Exporta a classe "Postagem".
+export class Postagem {
+  
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    constructor(id: number, titulo: string, texto: string, data: Date, foto: string, temaId: number) {
-        this.id = id;
-        this.titulo = titulo;
-        this.texto = texto;
-        this.data = data;
-        
+  
+  @IsNotEmpty()
+  @Column({ length: 100, nullable: false })
+  titulo: string;
 
-}}
+  
+  @IsNotEmpty()
+  @Column({ length: 1000, nullable: false })
+  texto: string;
+
+ 
+  @UpdateDateColumn()
+  data: Date;
+
+  
+  @ManyToOne(() => Tema, (tema) => tema.postagem, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "tema_id" })
+  tema: Tema;
+
+  
+  @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "usuario_id" })
+  usuario: Usuario;
+}

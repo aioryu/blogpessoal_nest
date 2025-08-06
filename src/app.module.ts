@@ -7,6 +7,10 @@ import { Postagem } from './postagem/entities/postagem.entity';
 import { Tema } from './tema/entities/tema.entity';
 import { TemaModule } from './tema/tema.module';
 import { PostagemModule } from './postagem/postagem.module';
+import { AuthModule } from './auth/auth.modole';
+import { Usuario } from './usuario/entities/usuario.entities';
+import { UsuarioModule } from './usuario/usuario.module';
+
 
 @Module({
   imports: [
@@ -17,13 +21,15 @@ import { PostagemModule } from './postagem/postagem.module';
       username: 'root',
       password: 'halle1021',
       database: 'db_blogpessoal',
-      entities: [Postagem, Tema],
+      entities: [Postagem, Tema, Usuario],
       synchronize: true,
       logging: true,
      
     }),
     PostagemModule,
-    TemaModule
+    TemaModule,
+    AuthModule,
+    UsuarioModule
   ],
   controllers: [],
   providers: [],

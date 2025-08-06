@@ -3,7 +3,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post 
 import { PostagemService } from '../service/postagem.service';
 import { Put, Delete } from '@nestjs/common/decorators';
 
-@Controller("/postagens")
+@Controller("/postagens") 
 export class   PostagemController {
   constructor(private readonly postagemService: PostagemService) {}
 
@@ -25,11 +25,11 @@ export class   PostagemController {
     findAllByTitulo(@Param('titulo') titulo:string): Promise<Postagem[]> {
         return this.postagemService.findAllByTitulo(titulo);
     }
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-    create(@Body() postagem: Postagem): Promise<Postagem> {
-        return this.postagemService.create(postagem);
-    }
+        @Post()
+        @HttpCode(HttpStatus.CREATED) 
+          create(@Body() postagem: Postagem): Promise<Postagem> {
+              return this.postagemService.create(postagem);
+          }
     @Put()
     @HttpCode(HttpStatus.CREATED)
 
